@@ -13,14 +13,14 @@ app.use(express.json());
 
 // Connect to database
 const db = mysql.createConnection(
-  {
+ {
     host: '127.0.0.1',
     user: 'root',
     password: 'Sullivan29',
     database: 'employees_db'
   },
-  console.log(`Connected to the employees_db database.`)
-);
+console.log(`Connected to the employees_db database.`)
+ );
 
 // Function to initialize inquirer
 function init() {
