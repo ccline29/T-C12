@@ -1,7 +1,9 @@
+// Description: This file contains the code that starts the server and connects to the MySQL database.
 const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer'); 
 
+// Set up Express app
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -14,7 +16,7 @@ const db = mysql.createConnection(
   {
     host: '127.0.0.1',
     user: 'root',
-    password: '',
+    password: 'Sullivan29',
     database: 'employees_db'
   },
   console.log(`Connected to the employees_db database.`)
@@ -142,13 +144,13 @@ function addRole() {
     })
 }
 
-
+// Add employee
 function addEmployee() {
     const employees =  db.promise().query('SELECT * FROM employee');
     const roles =  db.promise().query('SELECT * FROM roles');
     Promise.all([employees, roles]).then((values) => {
 
-
+// console.log(values[0][0].map(({ id, first_name, last_name }) => ({ name: `${first_name} ${last_name}`, value:id })));
     inquirer.prompt([
         {
             type: 'input', 
@@ -218,6 +220,7 @@ function updateRole() {
     })
 }
 
+// Start the app
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
